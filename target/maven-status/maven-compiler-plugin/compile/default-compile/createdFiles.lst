@@ -1,0 +1,9 @@
+com\mycompany\multishop\controller\servlet\ExampleServlet.class
+com\mycompany\multishop\controller\servlet\RegisterServlet.class
+com\mycompany\multishop\controller\util\HibernateUtil.class
+com\mycompany\multishop\JakartaRestConfiguration.class
+com\mycompany\multishop\model\dao\UserDAO.class
+com\mycompany\multishop\model\dto\UserDTO.class
+com\mycompany\multishop\resources\JakartaEE9Resource.class
+com\mycompany\multishop\controller\servlet\LoginServlet.class
+com\mycompany\multishop\model\entity\User.class
