@@ -5,7 +5,10 @@
 package com.mycompany.multishop.controller.util;
 
 import com.mycompany.multishop.model.dto.UserDTO;
+import com.mycompany.multishop.model.entity.Cart;
 import com.mycompany.multishop.model.entity.User;
+import com.mycompany.multishop.model.entity.Category;
+import com.mycompany.multishop.model.entity.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -24,6 +27,9 @@ public class HibernateUtil {
                 Configuration configuration = new Configuration();
                 configuration.configure("hibernate.cfg.xml");
                 configuration.addAnnotatedClass(User.class);
+                configuration.addAnnotatedClass(Category.class);
+                configuration.addAnnotatedClass(Product.class);
+                configuration.addAnnotatedClass(Cart.class);
                 sessionFactory = configuration.buildSessionFactory();
             } catch (Error e) {
                 System.out.println("Error");

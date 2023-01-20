@@ -6,6 +6,7 @@ package com.mycompany.multishop.controller.servlet;
 
 import com.mycompany.multishop.model.dao.UserDAO;
 import com.mycompany.multishop.model.dto.UserDTO;
+import com.mycompany.multishop.model.entity.User;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -70,16 +71,15 @@ public class LoginServlet extends HttpServlet {
             // 0: There's not a email linked stored in the db
             // 1: The password is incorrect
             // 2: Enter new session
-            
             if(dto == null){ //There's not email linked stored in the db
                 request.setAttribute("sessionOperation", 0);
-            } else if(dto.getEntity().getPassword() != hash.toString()){ //The password doesn't matches
+            } else if(!password.equals(dto.getEntity().getPassword())){ //The password doesn't matches
                 request.setAttribute("sessionOperation", 1);
             } else{
-                HttpSession session = request.getSession(true);
-                session.setAttribute("id", dto.getEntity().getIdUser());
-                session.setAttribute("username", dto.getEntity().getFirstName() + " " + dto.getEntity().getPaternalName());
-                response.sendRedirect("index.jsp");
+                request.setAttribute("dtoUser", dto);
+                RequestDispatcher rd = request.getRequestDispatcher("SessionServlet");
+                rd.forward(request, response);
+                return;
             }
         }
         RequestDispatcher rd = request.getRequestDispatcher("login.jsp");

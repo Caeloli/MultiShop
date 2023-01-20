@@ -54,14 +54,14 @@ public class RegisterServlet extends HttpServlet {
         dto.getEntity().setMaternalName(maternalName);
         dto.getEntity().setEmail(email);
         //Codify Password
-        SecureRandom random = new SecureRandom();
+        /*SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);
         KeySpec spec = new PBEKeySpec(passwordNoEncoded.toCharArray(), salt, 65536, 128);
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         byte[] hash = factory.generateSecret(spec).getEncoded();
-        
-        dto.getEntity().setPassword(hash.toString());
+        */
+        dto.getEntity().setPassword(passwordNoEncoded);
         dao.create(dto);
         
         response.sendRedirect("index.jsp");

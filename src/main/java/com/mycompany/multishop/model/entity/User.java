@@ -20,7 +20,7 @@ public class User {
     
     @Id @Column(name = "ID_USER")
     private int idUser;
-    @Column(name = "TYPE")
+    @Column(name = "TYPE") //0 = normal, 1 = admin
     private int type;
     @Column(name = "FIRST_NAME")
     private String firstName;

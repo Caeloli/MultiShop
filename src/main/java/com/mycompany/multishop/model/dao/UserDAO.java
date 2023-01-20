@@ -73,11 +73,14 @@ public class UserDAO {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             //Start transaction
             transaction = session.beginTransaction();
-            String hql = "FROM User WHERE EMAIL =  :EMAIL_DB";
+            String hql = "FROM User WHERE EMAIL =  :EMAIL_DB"; // Only works when the data is not gonna be modified
             Query query = session.createQuery(hql);
             query.setParameter("EMAIL_DB", dto.getEntity().getEmail());
-            dto.setEntity((User) query.getResultList().get(0));
-        } catch(Exception ex){
+            if(query.getResultList().isEmpty())
+                dto = null;
+            else
+                dto.setEntity((User) query.getResultList().get(0));
+        }catch(Exception ex){
             if(transaction != null){
                 transaction.rollback();
             }
@@ -102,7 +105,7 @@ public class UserDAO {
         return dto;
     }
     
-    public List readAll(UserDTO dto){
+    public List readAll(){
         Transaction transaction = null;
         List list = null;
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
@@ -128,13 +131,7 @@ public class UserDAO {
         
         dto = dao.readFromEmail(dto);
         
-        
-        if(dto != null){
-            System.out.println("dto User");
-            System.out.println(dto.getEntity().getFirstName());
-            System.out.println(dto.getEntity().getPaternalName());
-        }
-        
+        System.out.println(dto);        
     }
     
 }
